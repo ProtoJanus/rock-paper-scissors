@@ -5,11 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
-    <script src="index.js" defer></script>
+    <script src="./index.js" defer></script>
+    <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
+    <div class="content">
+        <div class="play-screen hidden">
+            <h1>Rock Paper Scissors</h1>
+            <button>Play Game</button>
+        </div>
+        <div class="game-screen">
+            <h2 class="round-info">Round: 1</h2>
+            <h1>Make a Selection!</h1>
+            <div class="choices">
+                <div class="user-choices">
+                    <div class="user-choice rock"></div>
+                    <div class="user-choice paper"></div>
+                    <div class="user-choice scissors"></div>
+                </div>
+                <div class="computer-choice"></div>
+            </div>
+        </div>
 
+    </div>
 </body>
 
 </html>
