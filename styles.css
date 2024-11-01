@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    background-color: #ffc8dd;
+    font-family: 'DynaPuff', 'Courier New', Courier, monospace;
+}
+
+.hidden {
+    visibility: hidden;
+    position: absolute;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+}
+
+
+.content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.play-screen {
+    height: 100vh;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+        font-size: 5vw;
+        text-align: center;
+        color: #9c9cd6;
+    }
+
+    button {
+        border: none;
+        background-color: transparent;
+        font-size: 4vw;
+        font-weight: 700;
+        color: #9c9cd6;
+        animation-name: button-size-change;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        cursor: pointer;
+    }
+
+    button:hover {
+        color: #c4c4ff;
+        cursor: pointer;
+    }
+}
+
+.game-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.round-info {
+    position: absolute;
+    top: 60px;
+    left: 50px;
+    font-size: 2em;
+}
+
+.choices {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.user-choices {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+}
+
+.user-choice {
+    height: auto;
+    max-width: 150px;
+    width: 100%;
+    padding: 4%;
+    border-radius: 15px;
+    background-color: #9c9cd6;
+    box-shadow: 0px 8px #0c0c66;
+    transition: 0.1s linear;
+    user-select: none;
+    margin: 10px;
+}
+
+.user-choice:active {
+    transform: translateY(8px);
+    box-shadow: 0px 0px #0c0c66
+}
+
+.user-choice:hover {
+    cursor: pointer;
+}
+
+.computer-choice {
+    order: -1;
+    height: 250px;
+    width: 250px;
+    border: 5px solid rgb(94, 94, 94);
+    padding: 10px;
+    border-radius: 15px;
+    background-color: black;
+    color: #4AF626;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 80px;
+
+    h1 {
+        font-size: 20px;
+        background-color: black;
+    }
+
+    p {
+        background-color: black;
+    }
+}
+
+@keyframes button-size-change {
+    0% {
+        Transform: scale(1);
+    }
+
+    50% {
+        Transform: scale(1.2)
+    }
+
+    100% {
+        Transform: scale(1);
+    }
+}
