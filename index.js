@@ -42,7 +42,6 @@ function playGame() {
 
     // Sets the initial state of the game on new call of "playGame()"
     round = 1;
-    console.log(`Initial Round`)
     let computerScore = 0;
     let humanScore = 0;
     let ties = 0;
@@ -56,7 +55,6 @@ function playGame() {
     userChoices.forEach(function (userChoice) {
         userChoice.addEventListener("click", function rounds(e) {
             round += 1;
-            console.log(round);
             let result = playRound(e.target.id, getComputerChoice());
             // change selection text on winner
             if (result === 0) {
