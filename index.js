@@ -1,19 +1,14 @@
-
-// generates a random selection for the computer
 function getComputerChoice() {
     let choices = ["rock", "paper", "scissors"];
-    return choices[Math.floor(Math.random() * choices.length)];
-}
+    let choice = choices[Math.floor(Math.random() * choices.length)];
+    const computerSelectionText = document.querySelector("#computer-selection-text");
+    computerSelectionText.textContent = `I choose ${choice}!`;
 
-function getUserChoice() {
-    let choice = prompt("Enter either Rock, Paper, or Scissors: ").toLowerCase();
     return choice;
 }
 
 function playRound(userChoice, computerChoice) {
     // tie = 0, human win = 1, computer wins = 2
-    console.log(userChoice);
-    console.log(computerChoice);
     // checks if user wins
     if (userChoice === 'paper' && computerChoice === 'rock' || userChoice === 'rock' && computerChoice === 'scissors' || userChoice === 'scissors' && computerChoice === 'paper') {
         return 1;
@@ -26,33 +21,98 @@ function playRound(userChoice, computerChoice) {
     }
 }
 
+
+
 function playGame() {
+    const roundInfo = document.querySelector("#round-info");
+    const makeSelectionText = document.querySelector("#make-selection-text");
+    const computerSelectionText = document.querySelector("#computer-selection-text");
+    const unblurred = document.querySelector("#unblurred");
+
+    // this gets the scoreboard text so we can modify and display to user when game is over
+    const playerScoreFinal = document.querySelector("#player-score-final");
+    const computerScoreFinal = document.querySelector("#computer-score-final");
+    const tiesScoreFinal = document.querySelector("#ties-score-final");
+    const resultFinal = document.querySelector("#result-final");
+
+    const playScreen = document.querySelector(".play-screen");
+    const gameScreen = document.querySelector(".game-screen");
+    playScreen.classList.toggle("hidden");
+    gameScreen.classList.toggle("hidden");
+
+    // Sets the initial state of the game on new call of "playGame()"
+    round = 1;
+    console.log(`Initial Round`)
     let computerScore = 0;
     let humanScore = 0;
+    let ties = 0;
+    roundInfo.textContent = `Round: ${round} out of 5`;
+    makeSelectionText.textContent = "Make a Selection!";
+    computerSelectionText.textContent = `Waiting.....`;
 
-    for (let i = 0; i < 5; i++) {
-        const humanSelection = getUserChoice();
-        const computerSelection = getComputerChoice();
 
-        let result = playRound(humanSelection, computerSelection);
+    const userChoices = document.querySelectorAll(".user-choice")
 
-        if (result === 0) {
-            console.log("You tied with the computer!");
-        } else if (result === 1) {
-            console.log("You won!");
-            humanScore += 1;
-        } else {
-            console.log("You Lost!");
-            computerScore += 1;
-        }
-    }
+    userChoices.forEach(function (userChoice) {
+        userChoice.addEventListener("click", function rounds(e) {
+            round += 1;
+            console.log(round);
+            let result = playRound(e.target.id, getComputerChoice());
+            // change selection text on winner
+            if (result === 0) {
+                makeSelectionText.textContent = "Looks like you tied, choose again!";
+                ties += 1;
+            } else if (result === 1) {
+                makeSelectionText.textContent = "Looks like you won, choose again!";
+                humanScore += 1;
+            } else {
+                makeSelectionText.textContent = "Looks like you lost, choose again!";
+                computerScore += 1;
+            }
 
-    console.log(`Final Score\nComputer: ${computerScore}\nPlayer: ${humanScore}`)
-    if (humanScore > computerScore) {
-        console.log("You won the game!");
-    } else {
-        console.log("You lost the game!");
-    }
+            if (round >= 6) {
+                unblurred.classList.toggle("hidden");
+                playerScoreFinal.textContent = `Player Score: ${humanScore}`;
+                computerScoreFinal.textContent = `Computer Score: ${computerScore}`;
+                tiesScoreFinal.textContent = `Ties: ${ties}`;
+
+                userChoices.forEach(function (userChoice) {
+                    userChoice.removeEventListener("click", rounds);
+                })
+
+                if (computerScore > humanScore) {
+                    resultFinal.textContent = "Computer Wins! Exit to play again!";
+                } else if (humanScore > computerScore) {
+                    resultFinal.textContent = "You win! Exit to play again!";
+                } else {
+                    resultFinal.textContent = "It was a tie! Exit to play again!";
+                }
+
+            } else {
+                roundInfo.textContent = `Round: ${round} out of 5`;
+            }
+        })
+    })
 }
+const playScreen = document.querySelector(".play-screen");
+const gameScreen = document.querySelector(".game-screen");
+const playGameButton = document.querySelector("#play-game-button");
+const gameScreenReset = document.querySelector("#game-screen-reset");
+const endScreenReset = document.querySelector("#end-screen-reset");
+const unblurred = document.querySelector("#unblurred");
+let round = 1;
 
-playGame();
+playGameButton.addEventListener("click", function () {
+    playGame();
+})
+
+gameScreenReset.addEventListener("click", function (e) {
+    playScreen.classList.toggle("hidden");
+    gameScreen.classList.toggle("hidden");
+})
+
+endScreenReset.addEventListener("click", function (e) {
+    playScreen.classList.toggle("hidden");
+    gameScreen.classList.toggle("hidden");
+    unblurred.classList.toggle("hidden")
+})
