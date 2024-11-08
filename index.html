@@ -16,8 +16,8 @@
             <button id="play-game-button">Play Game</button>
         </div>
         <div class="game-screen hidden">
-            <h2 class="round-info">Round: 1</h2>
-            <h1>Make a Selection!</h1>
+            <h2 id="round-info">Round: 1 out of 5</h2>
+            <h1 id="make-selection-text">Make a Selection!</h1>
             <div class="choices">
                 <div class="user-choices">
                     <img src="./images/rock.png" alt="" id="rock" class="user-choice" draggable="false">
@@ -26,14 +26,26 @@
                 </div>
                 <div class="computer-choice">
                     <h1>Computron 5000</h1>
-                    <p>Waiting.....</p>
+                    <p id="computer-selection-text">Waiting.....</p>
                 </div>
             </div>
-            <div class="reset-button">
+            <div draggable="false" id="game-screen-reset" class="reset-button">
                 x
             </div>
         </div>
+        <div id="unblurred" class="hidden">
+            <div id="end-screen">
+                <div draggable="false" id="end-screen-reset" class="reset-button">x</div>
+                <h1>Game Result</h1>
+                <div class="scores">
+                    <p id="player-score-final">Player Score: 0</p>
+                    <p id="computer-score-final">Computer Score: 0</p>
+                    <p id="ties-score-final">Ties: 0</p>
+                    <p id="result-final">INSERT WHO WON HERE</p>
+                </div>
 
+            </div>
+        </div>
     </div>
 </body>
 
